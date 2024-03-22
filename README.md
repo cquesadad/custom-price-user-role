@@ -115,4 +115,4 @@ If you encounter any issues or need additional help, please contact the support 
 I hope this documentation will be useful to guide the programmer in updating prices based on user role through WooCommerce API. If you need more help, don't hesitate to ask.
 
 ## Contributing
-There are many ways to contribute – reporting bugs, adding translations, feature suggestions and fixing bugs. For full details, please see CONTRIBUTING.md
+There are many ways to contribute – reporting bugs, adding translations, feature suggestions and fixing bugs. For full details, please see [CONTRIBUTING.md](https://github.com/cquesadad/custom-price-user-role/blob/main/CONTRIBUTING.md)
