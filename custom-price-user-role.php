@@ -32,7 +32,7 @@ add_action('plugins_loaded', 'require_members_plugin');
 function require_members_plugin_notice() { 
     ?>
     <div class="notice notice-error">
-        <p>The plugin <b>Members</b> is required to make <b>Custom Role Based Pricing</b> work correctly. Please, activate Member Plugin.</p>
+        <p>The plugin <b>Members</b> is required to make <b>Custom Role Based Pricing</b> work correctly. Please, install and activate Members Plugin.</p>
     </div>
     <?php 
 } 
@@ -68,18 +68,6 @@ function crbp_save_custom_price_fields($product_id) {
     }
 }
 add_action('woocommerce_process_product_meta', 'crbp_save_custom_price_fields');
-
-// Update cart page price
-function crbp_update_cart_item_price($cart_object) {
-    foreach ($cart_object->get_cart() as $cart_item_key => $cart_item) {
-        $product_id = $cart_item['product_id'];
-        $custom_price = crbp_get_custom_price_by_role($product_id);
-        if (!empty($custom_price)) {
-            $cart_item['data']->set_price($custom_price);
-        }
-    }
-}
-add_action('woocommerce_before_calculate_totals', 'crbp_update_cart_item_price');
 
 //Add settings link to admin page
 function cpur_settings_link( $links ) {
