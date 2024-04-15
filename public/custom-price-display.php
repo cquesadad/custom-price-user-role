@@ -8,22 +8,22 @@ function crbp_get_custom_price_by_role($product_id) {
     $roles = $user->roles;
     $custom_price = '';
 
-     // Verificar si se debe mostrar el precio personalizado
-     $show_custom_price = get_option('cpur_show_hide_prices', 1); // Valor predeterminado a 1 (activo)
+    // Verificar si se debe mostrar el precio personalizado
+    $show_custom_price = get_option('cpur_show_hide_prices', 1); // Valor predeterminado a 1 (activo)
 
-     // Si la opción de mostrar precios está desactivada, retornar precio vacío
-     if (!$show_custom_price) {
-         return $custom_price;
-     }
- 
-     // Verificar cada rol y obtener el precio personalizado
-     foreach ($roles as $role) {
-         $role_custom_price = get_post_meta($product_id, 'custom_price_' . $role, true);
-         if (!empty($role_custom_price)) {
-             // Si existe un precio personalizado, devolverlo
-             return $role_custom_price;
-         }
-     }
+    // Si la opción de mostrar precios está desactivada, retornar precio vacío
+    if (!$show_custom_price) {
+        return $custom_price;
+    }
+
+    // Verificar cada rol y obtener el precio personalizado
+    foreach ($roles as $role) {
+        $role_custom_price = get_post_meta($product_id, 'custom_price_' . $role, true);
+        if (!empty($role_custom_price)) {
+            // Si existe un precio personalizado, devolverlo
+            return $role_custom_price;
+        }
+    }
 
     // If there is no custom price for rolle retun empty custom price '' 
     return $custom_price;

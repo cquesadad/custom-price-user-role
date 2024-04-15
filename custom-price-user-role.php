@@ -81,18 +81,6 @@ function crbp_update_cart_item_price($cart_object) {
 }
 add_action('woocommerce_before_calculate_totals', 'crbp_update_cart_item_price');
 
-// Update checkout page price
-function crbp_update_checkout_item_price($cart_object) {
-    foreach ($cart_object->get_cart() as $cart_item_key => $cart_item) {
-        $product_id = $cart_item['product_id'];
-        $custom_price = crbp_get_custom_price_by_role($product_id);
-        if (!empty($custom_price)) {
-            $cart_item['data']->set_price($custom_price);
-        }
-    }
-}
-add_action('woocommerce_before_checkout_form', 'crbp_update_checkout_item_price', 10, 1);
-
 //Add settings link to admin page
 function cpur_settings_link( $links ) {
     $settings_link = '<a href="options-general.php?page=cpur-plugin-settings">' . __( 'Settings' ) . '</a>';
