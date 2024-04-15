@@ -21,7 +21,19 @@ This document describes the process to update product prices in WooCommerce base
 ### 2. Previous requirements
 - Access to the Consumer Key and COnsumer Secret and ability to send HTTP requests.
 - Basic knowledge of the JSON format and how to make REST requests.
+- Install [Members](https://wordpress.org/plugins/members/) plugin to create the custom members roles.
 
+### 3. Plugin options
+
+This plugins has a few settings to give admin users controls over the way custom prices are showed. 
+
+#### Show/Hide custom price
+
+This options allows admins to decide if show the custom price. Could be used for testing or for a fast desable without losing the custom price already inserted in products. 
+
+#### Show custom price with discount 
+
+This checkbox not selected by default gives admin the posibility to show the custom price as it was a discounted price from the woocommerce regular price. In case you are using also a Woocommerce discount price, it would show just the custom role price. 
 
 ### 3. Read and Update process
 
@@ -34,13 +46,13 @@ Before reading or updating prices, it is necessary to obtain the ID of the produ
 ```
 [WooCommerce_Store_URL]/wp-json/wc/v3/products/[product_ID]
 ```
-- Make sure you include the appropriate authentication parameters in the request, such as OAuth credentials or API keys.
+- Make sure you include the appropriate authentication parameters in the request, such as credentials or API keys.
 
 
-####  c. Formato de datos:
-The request must contain data in JSON format that includes the new custom pricing values for each user role.
+####  c. Data format:
+The request must contain data in JSON format that includes the new custom pricing values for each user role .
 
-Each custom price field must have a unique name that reflects the user role it is associated with. For example:
+Each custom price field must have a unique name that reflects the user role it is associated with. You should check the new user ```id``` and ```key``` in order to read and write the data correctly. For example:
 
 ```
 {
@@ -61,11 +73,11 @@ Each custom price field must have a unique name that reflects the user role it i
 ```
 
 #### d. Submit the request:
-- Envía la solicitud HTTP al servidor de WooCommerce con los datos actualizados.
-- Verifica la respuesta de la solicitud para asegurarte de que los precios se hayan actualizado correctamente.
+- Send the HTTP request to the WooCommerce server with the updated data.
+- Check the request response to make sure prices have been updated correctly.
 
 ### 4. Request example:
-Here is an example of what a read request would look like using cURL in php:
+Here is an example of what a read request would look like using cURL in php. You will need to know the exact ```id``` and ```key``` 
 
 ```
 // Consumer Key and Consumer Secret of WooCommerce
@@ -75,35 +87,55 @@ $consumer_secret = 'COMSUMER_SECRET';
 // API WooCommerce Store URL to get product data and custom prices
 $url = '[WooCommerce_Store_URL]/wp-json/wc/v3/products/[product_ID]';
 
-// init cURL
+// Data to send in the update request
+$data = array(
+    'meta_data' => array(
+		array(
+            'id' => 190, // Student Custom Price ID
+            'key' => 'custom_price_estudiante',
+            'value' => '6.00' // Add new price
+        ),
+        array(
+            'id' => 152, // Profesional Custom Price ID
+            'key' => 'custom_price_profesional',
+            'value' => '5.00' // Add new price
+        )
+        
+    )
+);
+
+// Convert the array to JSON
+$data_json = json_encode($data);
+
+// Init cURL
 $ch = curl_init();
 
-// Config URL and other settings
+// Configure the URL and other necessary options
 curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT'); // Use the PUT method to update data
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'Content-Length: ' . strlen($data_json))
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
+curl_setopt($ch, CURLOPT_VERBOSE, true);
 
-// Config Basic Auth
+// Set up basic authentication
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 curl_setopt($ch, CURLOPT_USERPWD, $consumer_key . ':' . $consumer_secret);
 
-// Make request to WooCommerce API
+// Make the request to the WooCommerce API
 $response = curl_exec($ch);
 
-// Check errors
+// Check for errors
 if(curl_errno($ch)){
     echo 'Error: ' . curl_error($ch);
+    echo 'Error: ' . curl_errno($ch);
 }
 
-// Decode JSON reponse
-$data = json_decode($response, true);
-
-// Get custom prices 
-$price_student = $data['meta_data'][9]['value']; // Adjust depending on JSON structure
-$price_professional = $data['meta_data'][7]['value']; // Adjust depending on JSON structure
-
-// Imprimir los precios obtenidos
-echo "Student price: " . $price_student . "<br>";
-echo "Professional price: " . $price_professional . "<br>";
+// Print the answer
+echo $response;
 
 // Close cURL
 curl_close($ch);
