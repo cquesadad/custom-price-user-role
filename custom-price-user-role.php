@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Custom Price by User Role
  * Description: Adds custom price fields based on user role and allows updating via WooCommerce REST API.
- * Version: 1.0
+ * Version: 1.0.1
  * Author: Carlos Quesada
  * Author URI: https://cquesada.es
  * Text Domain: custom-price-user-role
@@ -11,16 +11,21 @@
 defined( 'ABSPATH' ) || exit;
 
 // Includes file for plugin settings
-include_once(plugin_dir_path(__FILE__) . 'includes/plugin-settings.php');
+include_once(plugin_dir_path(__FILE__) . 'admin/plugin-settings.php');
 
 // Include file for frontend modifications
 include_once(plugin_dir_path(__FILE__) . 'public/custom-price-display.php');
 
-// Verify if required plugins are active
+// Verificar si los plugins requeridos están activos
 function require_members_plugin() {
-    // Check if requiered plugin is active
+    // Asegurarse de que la función is_plugin_active esté disponible
+    if (!function_exists('is_plugin_active')) {
+        include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+    }
+
+    // Verificar si el plugin requerido está activo
     if (is_plugin_active('members/members.php')) {
-        // Add here code that depends on members.php
+        // Agrega aquí el código que depende del plugin members.php
     } else {
         // El plugin requerido no está activo, muestra un mensaje de advertencia
         add_action('admin_notices', 'require_members_plugin_notice');
@@ -28,11 +33,11 @@ function require_members_plugin() {
 }
 add_action('plugins_loaded', 'require_members_plugin');
 
-// Show warning message
+// Mostrar mensaje de advertencia si el plugin requerido no está activo
 function require_members_plugin_notice() { 
     ?>
     <div class="notice notice-error">
-        <p>The plugin <b>Members</b> is required to make <b>Custom Role Based Pricing</b> work correctly. Please, install and activate Members Plugin.</p>
+        <p><?php _e('The plugin <b>Members</b> is required to make <b>Custom Role Based Pricing</b> work correctly. Please, activate Member Plugin.', 'custom-price-user-role'); ?></p>
     </div>
     <?php 
 } 
@@ -41,10 +46,10 @@ function require_members_plugin_notice() {
 function crbp_add_custom_price_fields() {
     global $product;
     
-    // Get all user roles
+    // Obtener todos los roles de usuario
     $editable_roles = get_editable_roles();
     foreach ($editable_roles as $role => $details) {
-        // Show price field for each user role 
+        // Mostrar campos de precio específicos para cada rol de usuario
         woocommerce_wp_text_input(array(
             'id' => 'custom_price_' . $role,
             'class' => 'short',
