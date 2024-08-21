@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-price-user-"
 "role\n"
 "POT-Creation-Date: 2024-08-21T16:34:21+00:00\n"
-"PO-Revision-Date: 2024-08-21 17:37+0100\n"
+"PO-Revision-Date: 2024-08-21 18:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -50,15 +50,15 @@ msgstr "Custom Price By User Role"
 
 #: admin/plugin-settings.php:21
 msgid "Custom Price by User Rol"
-msgstr "Custom Price by User Role"
+msgstr "Custom Price by User Rol"
 
 #: admin/plugin-settings.php:42
 msgid "Main configuration"
-msgstr "Main settings"
+msgstr "Main configuration"
 
 #: admin/plugin-settings.php:48
 msgid "Show/hide custom prices"
-msgstr "Show/hide custom price"
+msgstr "Show/hide custom prices"
 
 #: admin/plugin-settings.php:58
 msgid "Select whether you want to show or hide prices by role:"
@@ -79,3 +79,7 @@ msgid ""
 msgstr ""
 "The plugin <b>Members</b> is required to make <b>Custom Role Based Pricing</"
 "b> work correctly. Please, activate Member Plugin."
+
+#: custom-price-user-role.php:40
+msgid "Price by role: %s"
+msgstr "Price by role: %s"

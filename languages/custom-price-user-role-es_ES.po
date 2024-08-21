@@ -1,10 +1,12 @@
+# Copyright (C) 2024 Carlos Quesada
+# This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: Custom Price by User Role 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-price-user-"
 "role\n"
 "POT-Creation-Date: 2024-08-21T16:34:21+00:00\n"
-"PO-Revision-Date: 2024-08-21 17:42+0100\n"
+"PO-Revision-Date: 2024-08-21 18:08+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -12,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
-"X-Poedit-Basepath: .\n"
+"X-Domain: custom-price-user-role\n"
 
 #. Plugin Name of the plugin
 #: custom-price-user-role.php
@@ -26,7 +28,7 @@ msgid ""
 "WooCommerce REST API."
 msgstr ""
 "Añade campos de precios personalizados según el rol de usuario y habilita "
-"que se actualicen los precios a través de la API RESTde Woocommerce."
+"que se actualicen los precios a través de la API REST de Woocommerce."
 
 #. Author of the plugin
 #: custom-price-user-role.php
@@ -79,3 +81,7 @@ msgstr ""
 "El plugin <b>Members</b> es requerido para hacer que el plugin <b>Precios "
 "Personalizados por Rol de Usuario</b> funcione correctamente. Por favor, "
 "instale y active el plugin Members."
+
+#: custom-price-user-role.php:40
+msgid "Price by role: %s"
+msgstr "Precio para rol: %s"

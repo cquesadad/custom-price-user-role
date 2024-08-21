@@ -69,3 +69,7 @@ msgstr ""
 #: custom-price-user-role.php:44
 msgid "The plugin <b>Members</b> is required to make <b>Custom Role Based Pricing</b> work correctly. Please, activate Member Plugin."
 msgstr ""
+
+#: custom-price-user-role.php:40
+msgid "Price by role: %s"
+msgstr ""

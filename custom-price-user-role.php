@@ -20,6 +20,15 @@ include_once(plugin_dir_path(__FILE__) . 'admin/plugin-settings.php');
 // Include file for frontend modifications
 include_once(plugin_dir_path(__FILE__) . 'public/custom-price-display.php');
 
+function cpur_load_textdomain() {
+    load_plugin_textdomain(
+        'custom-price-user-role', 
+        false,             
+        dirname(plugin_basename(__FILE__)) . '/languages/'
+    );
+}
+add_action('plugins_loaded', 'cpur_load_textdomain');
+
 // Verificar si los plugins requeridos están activos
 function require_members_plugin() {
     // Asegurarse de que la función is_plugin_active esté disponible
@@ -58,7 +67,7 @@ function crbp_add_custom_price_fields() {
             'id' => 'custom_price_' . $role,
             'class' => 'short',
             // Translators: %s is the role name.
-            'label' => sprintf(__('Precio para rol %s', 'woocommerce'), $details['name']),
+            'label' => sprintf(__('Price by role: %s', 'custom-price-user-role'), $details['name']),
             'type' => 'number',
             'custom_attributes' => array(
                 'step' => 'any',
