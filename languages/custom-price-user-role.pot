@@ -1,0 +1,71 @@
+# Copyright (C) 2024 Carlos Quesada
+# This file is distributed under the GPLv3.
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Price by User Role 1.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-price-user-role\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-08-21T16:34:21+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: custom-price-user-role\n"
+
+#. Plugin Name of the plugin
+#: custom-price-user-role.php
+msgid "Custom Price by User Role"
+msgstr ""
+
+#. Description of the plugin
+#: custom-price-user-role.php
+msgid "Adds custom price fields based on user role and allows updating via WooCommerce REST API."
+msgstr ""
+
+#. Author of the plugin
+#: custom-price-user-role.php
+msgid "Carlos Quesada"
+msgstr ""
+
+#. Author URI of the plugin
+#: custom-price-user-role.php
+msgid "https://cquesada.es"
+msgstr ""
+
+#: admin/plugin-settings.php:8
+msgid "Settings Custom Price By User Role"
+msgstr ""
+
+#: admin/plugin-settings.php:9
+msgid "Custom Price By User Role"
+msgstr ""
+
+#: admin/plugin-settings.php:21
+msgid "Custom Price by User Rol"
+msgstr ""
+
+#: admin/plugin-settings.php:42
+msgid "Main configuration"
+msgstr ""
+
+#: admin/plugin-settings.php:48
+msgid "Show/hide custom prices"
+msgstr ""
+
+#: admin/plugin-settings.php:58
+msgid "Select whether you want to show or hide prices by role:"
+msgstr ""
+
+#: admin/plugin-settings.php:68
+msgid "Show Price by User Role"
+msgstr ""
+
+#: admin/plugin-settings.php:73
+msgid "Hide Price by User Role"
+msgstr ""
+
+#: custom-price-user-role.php:44
+msgid "The plugin <b>Members</b> is required to make <b>Custom Role Based Pricing</b> work correctly. Please, activate Member Plugin."
+msgstr ""

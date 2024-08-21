@@ -6,6 +6,10 @@
  * Author: Carlos Quesada
  * Author URI: https://cquesada.es
  * Text Domain: custom-price-user-role
+ * Requires at least: 6.5
+ * Requires PHP: 7.4
+ * License: GPLv3
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -37,7 +41,7 @@ add_action('plugins_loaded', 'require_members_plugin');
 function require_members_plugin_notice() { 
     ?>
     <div class="notice notice-error">
-        <p><?php _e('The plugin <b>Members</b> is required to make <b>Custom Role Based Pricing</b> work correctly. Please, activate Member Plugin.', 'custom-price-user-role'); ?></p>
+        <p><?php echo esc_html__('The plugin <b>Members</b> is required to make <b>Custom Role Based Pricing</b> work correctly. Please, activate Member Plugin.', 'custom-price-user-role'); ?></p>
     </div>
     <?php 
 } 
@@ -53,7 +57,8 @@ function crbp_add_custom_price_fields() {
         woocommerce_wp_text_input(array(
             'id' => 'custom_price_' . $role,
             'class' => 'short',
-            'label' => __('Precio para rol ' . $details['name'], 'woocommerce'),
+            // Translators: %s is the role name.
+            'label' => sprintf(__('Precio para rol %s', 'woocommerce'), $details['name']),
             'type' => 'number',
             'custom_attributes' => array(
                 'step' => 'any',
@@ -66,6 +71,16 @@ add_action('woocommerce_product_options_pricing', 'crbp_add_custom_price_fields'
 
 // Save custom price fields data.
 function crbp_save_custom_price_fields($product_id) {
+    // Verificar que el nonce es válido.
+    if (!isset($_POST['crbp_custom_price_nonce']) || !wp_verify_nonce($_POST['crbp_custom_price_nonce'], 'crbp_save_custom_price_action')) {
+        return; // Si el nonce no es válido, detener la ejecución.
+    }
+    
+    // Verificar permisos de usuario (opcional, pero recomendado).
+    if (!current_user_can('edit_post', $product_id)) {
+        return; // Si el usuario no tiene permisos, detener la ejecución.
+    }
+
     $editable_roles = get_editable_roles();
     foreach ($editable_roles as $role => $details) {
         $custom_price_role = isset($_POST['custom_price_' . $role]) ? $_POST['custom_price_' . $role] : '';

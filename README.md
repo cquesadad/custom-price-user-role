@@ -4,7 +4,7 @@ Adds custom price fields based on user role in Woocommerce Stores and allows upd
 
 ## Prerequisites
 
-WordPress 5.6 or greater and WooCommerce 5.7.0 or greater should be installed prior to the Custom Price By User Role plugin.
+WordPress 6.5 or greater and WooCommerce 8.0.0 or greater should be installed prior to the Custom Price By User Role plugin.
 
 Additionally you will need to install an user role plugin manager if you want to add custom roles, otherwise you will have only default wordpress user role like: subscriber, administrator, store manager and so on. 
 
